@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анкета партнёра</title>
+<style>
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #FFD700;
+}
+
+form {
+  display: inline-block;
+  margin-top: 20px;
+  text-align: left;
+}
+
+input, select, textarea {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 300px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  background: #FFD700;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #FFC000;
+}
+</style>
+</head>
+<body>
+
+<h1>Анкета для партнёра</h1>
+
+<form id="form">
+  <label>Имя:</label>
+  <input type="text" id="name" required>
+
+  <label>Телефон:</label>
+  <input type="text" id="phone" required>
+
+  <label>Telegram:</label>
+  <input type="text" id="tg">
+
+  <button type="submit">Отправить</button>
+</form>
+
+<p id="status"></p>
+
+<script>
+  const form = document.getElementById('form');
+  const status = document.getElementById('status');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Берём значения
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const tg = document.getElementById('tg').value;
+
+    // Просто выводим на экран (пока без базы)
+    status.innerHTML = `Заявка принята! <br>Имя: ${name} <br>Телефон: ${phone} <br>Telegram: ${tg}`;
+
+    // Сбрасываем форму
+    form.reset();
+  });
+</script>
+
+</body>
+</html>

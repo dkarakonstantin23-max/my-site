@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Анкета</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 900px;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-family: 'Caveat', cursive;
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  opacity: 0.6;
+  margin-bottom: 40px;
+}
+
+/* Анимация */
+.fade {
+  opacity: 0;
+  transform: translateX(-80px);
+  animation: slide 0.7s ease forwards;
+}
+
+@keyframes slide {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  color: #f5c400;
+  margin-bottom: 15px;
+}
+
+.question {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  accent-color: #f5c400;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  background: #f5c400;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ffd83d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1 class="fade">Анкета</h1>
+<div class="subtitle fade">(Отвечайте честно — правильных или неправильных ответов нет)</div>
+
+<form id="form"></form>
+
+</div>
+
+<script>
+const questions = [
+  {
+    title: "1. Отношение к работе и деньгам",
+    q: [
+      ["Что для вас важнее?", ["Стабильность", "Возможность заработать больше", "Свободный график", "Свой бизнес"]],
+      ["Как реагируете, если доход зависит от вас?", ["Комфортно", "Нормально", "Лучше фикс", "Стресс"]],
+      ["Хотели бы увеличить доход в 2–3 раза?", ["Да, готов работать", "Да, без сильных изменений", "Не приоритет", "Нет"]]
+    ]
+  },
+  {
+    title: "2. Коммуникация",
+    q: [
+      ["Легко ли начинать разговор?", ["Да", "Иногда", "Сложно", "Очень сложно"]],
+      ["Что чувствуете, когда говорят «нет»?", ["Нормально", "Неприятно", "Расстраиваюсь", "Больше не предлагаю"]],
+      ["Любите помогать людям?", ["Да", "Иногда", "Редко", "Нет"]]
+    ]
+  },
+  {
+    title: "3. Обучаемость и дисциплина",
+    q: [
+      ["Готовы учиться 20–40 минут в день?", ["Да", "Через день", "Иногда", "Нет"]],
+      ["Результат через 3–6 месяцев — нормально?", ["Да", "Если вижу прогресс", "Хочу быстрее", "Долго"]],
+      ["Отношение к инструкциям?", ["Люблю", "Если логично", "По-своему", "Не люблю правила"]]
+    ]
+  },
+  {
+    title: "4. Время",
+    q: [
+      ["Сколько времени готовы уделять?", ["2–4 часа", "1–2 часа", "До 1 часа", "Нет времени"]],
+      ["Ваш текущий статус?", ["Работаю", "В декрете", "Учусь", "Ищу доход", "Предприниматель"]]
+    ]
+  },
+  {
+    title: "5. Психология",
+    q: [
+      ["Отношение к продажам?", ["Помощь людям", "Нормально", "Не люблю", "Терпеть не могу"]],
+      ["Если окружение не поддержит?", ["Продолжу", "С наставником", "Сомневаюсь", "Нет"]],
+      ["Что больше мотивирует?", ["Деньги", "Свобода", "Признание", "Общение", "Стабильность"]]
+    ]
+  }
+];
+
+const form = document.getElementById("form");
+let delay = 0.2;
+
+questions.forEach((sec, i) => {
+  const section = document.createElement("div");
+  section.className = "section fade";
+  section.style.animationDelay = delay + "s";
+  delay += 0.2;
+
+  section.innerHTML = `<h2>${sec.title}</h2>`;
+
+  sec.q.forEach((item, qi) => {
+    const q = document.createElement("div");
+    q.className = "question fade";
+    q.style.animationDelay = delay + "s";
+    delay += 0.15;
+
+    q.innerHTML = `<b>${item[0]}</b>`;
+    item[1].forEach(a => {
+      q.innerHTML += `
+        <label class="fade" style="animation-delay:${delay}s">
+          <input type="radio" name="q${i}${qi}"> ${a}
+        </label>`;
+      delay += 0.1;
+    });
+
+    section.appendChild(q);
+  });
+
+  form.appendChild(section);
+});
+
+const btn = document.createElement("button");
+btn.textContent = "Отправить анкету";
+btn.className = "fade";
+btn.style.animationDelay = delay + "s";
+form.appendChild(btn);
+</script>
+
+</body>
+</html>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabase = supabase.createClient(
+  "SUPABASE_URL",
+  "SUPABASE_ANON_KEY"
+);
+
+const ref = new URLSearchParams(window.location.search).get("ref") || "unknown";
+
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  await supabase.from("leads").insert([{
+    name: name.value,
+    phone: phone.value,
+    telegram: tg.value,
+    ref: ref
+  }]);
+
+  alert("Заявка отправлена");
+});
+</script>
+

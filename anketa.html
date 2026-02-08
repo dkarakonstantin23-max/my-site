@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анкета LR</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Контейнер формы */
+.container {
+  width: 90%;
+  max-width: 900px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Заголовок */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* Вопросы */
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Кнопка отправки */
+button {
+  padding: 15px 30px;
+  background-color: #000;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+button:hover {
+  background-color: #333;
+}
+
+/* Сообщение после отправки */
+#status {
+  display: none;
+  padding: 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Анимация плавного появления */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Адаптивность для ПК и мобильных */
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  input, select, textarea {
+    flex: 1 1 45%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Анкета LR</h1>
+
+  <form id="form">
+    <input type="text" placeholder="1. Ваше имя" required>
+    <input type="text" placeholder="2. Телефон" required>
+    <input type="email" placeholder="3. Email" required>
+    <input type="text" placeholder="4. Что для вас важнее?" required>
+    <input type="text" placeholder="5. Как вы реагируете на доход?" required>
+    <input type="text" placeholder="6. Хотели бы увеличить доход?" required>
+    <input type="text" placeholder="7. Легко ли начинать разговор с людьми?" required>
+    <input type="text" placeholder="8. Как чувствуете себя при 'нет'?" required>
+    <input type="text" placeholder="9. Любите помогать людям?" required>
+    <input type="text" placeholder="10. Готовы учиться 20–40 минут ежедневно?" required>
+    <input type="text" placeholder="11. Если результат через 3–6 мес — нормально?" required>
+    <input type="text" placeholder="12. Как относитесь к системе и инструкциям?" required>
+    <input type="text" placeholder="13. Сколько времени готовы уделять дополнительному доходу?" required>
+    <input type="text" placeholder="14. Как относитесь к продажам?" required>
+    <button type="submit">Отправить анкету</button>
+  </form>
+
+  <div id="status">Анкета заполнена! Мы свяжемся с вами в свободное время.</div>
+</div>
+
+<script>
+const form = document.getElementById('form');
+const status = document.getElementById('status');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  form.style.display = 'none';
+  status.style.display = 'block';
+});
+</script>
+
+</body>
+</html>

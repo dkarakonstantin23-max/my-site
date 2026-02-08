@@ -1,0 +1,30 @@
+/* Кнопка */
+.submit-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #FFD700;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  animation: glow 2s infinite alternate;
+}
+
+/* Плавное мягкое свечение */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #FFD700;
+    background-color: #FFD700;
+  }
+  50% {
+    box-shadow: 0 0 20px #FFD700;
+    background-color: #FFC700;
+  }
+  100% {
+    box-shadow: 0 0 5px #FFD700;
+    background-color: #FFD700;
+  }
+}

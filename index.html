@@ -3,87 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Анкета партнёра</title>
+<title>LR Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-body {
-  background: #000;
-  color: #fff;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  text-align: center;
-  padding: 20px;
-}
-
-h1 {
-  color: #FFD700;
-}
-
-form {
-  display: inline-block;
-  margin-top: 20px;
-  text-align: left;
-}
-
-input, select, textarea {
-  display: block;
-  margin: 10px 0;
-  padding: 8px;
-  width: 300px;
-  border-radius: 5px;
-  border: none;
-}
-
-button {
-  background: #FFD700;
-  color: #000;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #FFC000;
-}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Montserrat',sans-serif;background:linear-gradient(to bottom,#000,#444);color:#fff;padding:40px 0 100px;position:relative;}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.particle{position:absolute;width:3px;height:3px;background:rgba(255,255,255,0.4);border-radius:50%;animation: floatUp linear infinite;}
+@keyframes floatUp{from{transform:translateY(100vh);opacity:0;}50%{opacity:1;}to{transform:translateY(-10vh);opacity:0;}}
+.container{width:90%;max-width:1000px;margin:auto;position:relative;z-index:1;}
+.section{background:rgba(0,0,0,0.65);border-radius:20px;padding:30px;margin-bottom:40px;}
+.images-row{display:flex;gap:20px;margin-bottom:25px;}
+.images-row img{width:50%;border-radius:16px;}
+@media(max-width:768px){.images-row{flex-direction:column;}.images-row img{width:100%;}}
+img.animate{width:100%;border-radius:16px;margin-bottom:20px;}
+h2{margin-bottom:15px;}
+p{line-height:1.7;margin-bottom:12px;}
+ul{padding-left:20px;margin-bottom:12px;}
+li{margin-bottom:6px;}
+.animate{opacity:0;transform:translateX(-60px);transition: all 0.8s ease;}
+.animate.show{opacity:1;transform:translateX(0);}
+#startBtn{display:block;margin:60px auto 0;padding:18px 45px;background:#fff;color:#000;border:none;border-radius:30px;font-weight:700;cursor:pointer;}
+#form{display:none;flex-direction:column;gap:30px;background:rgba(0,0,0,0.7);padding:35px;border-radius:22px;margin-top:40px;}
+.question h3{font-size:15px;margin-bottom:10px;}
+select{width:100%;padding:12px;border-radius:8px;border:none;}
+.submit-btn{padding:16px;background:#fff;color:#000;border:none;border-radius:30px;font-weight:700;cursor:pointer;}
+#loginBtn{position:fixed;top:20px;right:20px;padding:12px 20px;background:#fff;color:#000;border:none;border-radius:20px;font-weight:700;cursor:pointer;z-index:10;}
+#answersContainer{margin-top:50px;display:none;background:rgba(0,0,0,0.6);padding:20px;border-radius:15px;}
+.answerItem{border-bottom:1px solid rgba(255,255,255,0.2);padding:10px 0;}
+#successMessage{display:none;position:fixed;top:20px;right:20px;background:green;color:#fff;padding:15px 25px;border-radius:12px;z-index:20;font-weight:700;}
 </style>
 </head>
 <body>
 
-<h1>Анкета для партнёра</h1>
+<div id="particles"></div>
+<button id="loginBtn">Войти через Google</button>
+<div id="successMessage">Анкета отправлена! Мы свяжемся с вами в ближайшее время.</div>
 
-<form id="form">
-  <label>Имя:</label>
-  <input type="text" id="name" required>
+<div class="container">
 
-  <label>Телефон:</label>
-  <input type="text" id="phone" required>
+  <!-- Секции с фотками и текстом -->
+  <div class="section">
+    <img src="img/1.jpg" class="animate">
+    <h2 class="animate">БИЗНЕС С LR HEALTH & BEAUTY</h2>
+    <p class="animate">Доход на рекомендациях без опыта</p>
+  </div>
 
-  <label>Telegram:</label>
-  <input type="text" id="tg">
+  <div class="section">
+    <img src="img/2.jpg" class="animate">
+    <p class="animate">Мы развиваемся по системе рекомендательного маркетинга...</p>
+    <p class="animate">Суть проста: ты пользуешься продуктом → рекомендуешь → получаешь процент.</p>
+    <p class="animate">Ты не продавец. Ты партнёр компании.</p>
+  </div>
 
-  <button type="submit">Отправить</button>
-</form>
+  <div class="section">
+    <img src="img/3.jpg" class="animate">
+    <h2 class="animate">Как работает модель</h2>
+    <p class="animate">Ты уже рекомендуешь:</p>
+    <ul>
+      <li class="animate">фильмы</li>
+      <li class="animate">кафе</li>
+      <li class="animate">врачей</li>
+      <li class="animate">товары</li>
+    </ul>
+    <p class="animate"><strong>Здесь платят.</strong></p>
+  </div>
 
-<p id="status"></p>
+  <div class="section">
+    <img src="img/4.jpg" class="animate">
+    <h2 class="animate">После регистрации ты становишься партнёром</h2>
+    <ul>
+      <li class="animate">используешь продукт</li>
+      <li class="animate">делишься опытом</li>
+      <li class="animate">создаёшь свою клиентскую базу</li>
+      <li class="animate">получаешь процент с оборота</li>
+    </ul>
+    <p class="animate"><strong>Доход не разовый — а постоянный</strong></p>
+  </div>
 
-<script>
-  const form = document.getElementById('form');
-  const status = document.getElementById('status');
+  <div class="section">
+    <img src="img/5.jpg" class="animate">
+    <h2 class="animate">За что платят</h2>
+    <ul>
+      <li class="animate">с покупок клиентов</li>
+      <li class="animate">с покупок партнёров</li>
+      <li class="animate">с роста команды</li>
+    </ul>
+  </div>
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  <div class="section">
+    <div class="images-row">
+      <img src="img/6.jpg" class="animate">
+      <img src="img/7.jpg" class="animate">
+    </div>
+    <h2 class="animate">Варианты входа в проект</h2>
+    <p class="animate">Начать можно без больших вложений — есть два варианта:</p>
+    <p class="animate"><strong>1. Через готовый стартовый набор</strong></p>
+    <p class="animate">Ты выбираешь один из предложенных наборов...</p>
+    <p class="animate"><strong>2. Через личный заказ</strong></p>
+    <p class="animate">Можно начать с покупки любых продуктов от 2999 грн.</p>
+    <p class="animate"><strong>Оба варианта дают:</strong></p>
+    <ul>
+      <li class="animate">регистрацию партнёра</li>
+      <li class="animate">доступ к обучению</li>
+      <li class="animate">поддержку команды</li>
+      <li class="animate">процент с рекомендаций</li>
+    </ul>
+  </div>
 
-    // Берём значения
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const tg = document.getElementById('tg').value;
+  <button id="startBtn" class="animate">Заполнить анкету</button>
 
-    // Просто выводим на экран (пока без базы)
-    status.innerHTML = `Заявка принята! <br>Имя: ${name} <br>Телефон: ${phone} <br>Telegram: ${tg}`;
+  <form id="form">
+    <p>(Отвечайте честно — правильных или неправильных ответов нет)</p>
+    <!-- Тут все 14 вопросов (как в предыдущем коде) -->
+    <div class="question"><h3>1. Что для вас важнее?</h3><select><option>Стабильность (фиксированная зарплата)</option><option>Возможность заработать больше, чем обычно</option><option>Свободный график</option><option>Свой бизнес</option></select></div>
+    <div class="question"><h3>2. Как вы реагируете, если доход зависит только от вас?</h3><select><option>Комфортно — люблю ответственность</option><option>Нормально, если понимаю систему</option><option>Лучше когда платят просто за время</option><option>Это вызывает стресс</option></select></div>
+    <div class="question"><h3>3. Хотели бы вы увеличить доход в 2–3 раза в течение 1–2 лет?</h3><select><option>Да, готов(а) работать ради этого</option><option>Да, но без сильных изменений в жизни</option><option>Было бы неплохо, но не приоритет</option><option>Нет, мне хватает</option></select></div>
+    <div class="question"><h3>4. Легко ли вам начинать разговор с незнакомыми людьми?</h3><select><option>Да</option><option>Иногда</option><option>Скорее сложно</option><option>Очень сложно</option></select></div>
+    <div class="question"><h3>5. Что чувствуете, когда вам говорят «нет»?</h3><select><option>Нормально, ищу дальше</option><option>Неприятно, но переживаю</option><option>Сильно расстраиваюсь</option><option>После этого больше не предлагаю</option></select></div>
+    <div class="question"><h3>6. Любите помогать людям выбирать / советовать?</h3><select><option>Да, постоянно</option><option>Иногда</option><option>Редко</option><option>Нет</option></select></div>
+    <div class="question"><h3>7. Готовы ли учиться новому 20–40 минут ежедневно?</h3><select><option>Да</option><option>Через день</option><option>Иногда</option><option>Нет</option></select></div>
+    <div class="question"><h3>8. Если результат появляется через 3–6 месяцев — это нормально?</h3><select><option>Да</option><option>Если вижу прогресс</option><option>Хочу быстрее</option><option>Слишком долго</option></select></div>
+    <div class="question"><h3>9. Как вы относитесь к системе и инструкциям?</h3><select><option>Люблю — упрощает жизнь</option><option>Если логично — ок</option><option>Предпочитаю по-своему</option><option>Не люблю правила</option></select></div>
+    <div class="question"><h3>10. Сколько времени в день реально готовы уделять дополнительному доходу?</h3><select><option>2–4 часа</option><option>1–2 часа</option><option>До 1 часа</option><option>Почти нет времени</option></select></div>
+    <div class="question"><h3>11. Сейчас вы:</h3><select><option>На работе</option><option>В декрете</option><option>Учусь</option><option>Ищу доход</option><option>Предприниматель</option></select></div>
+    <div class="question"><h3>12. Как относитесь к продажам?</h3><select><option>Это помощь людям</option><option>Нормально</option><option>Не люблю, но можно</option><option>Терпеть не могу</option></select></div>
+    <div class="question"><h3>13. Если окружение не поддержит — продолжите?</h3><select><option>Да</option><option>Если будет наставник</option><option>Сомневаюсь</option><option>Скорее нет</option></select></div>
+    <div class="question"><h3>14. Что вас больше мотивирует?</h3><select><option>Деньги</option><option>Свобода</option><option>Признание</option><option>Общение</option><option>Стабильность</option></select></div>
 
-    // Сбрасываем форму
-    form.reset();
+    <button type="submit" class="submit-btn">Отправить анкету</button>
+  </form>
+
+  <div id="answersContainer"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey:"AIzaSyB1M8azlc-YQDhuv1Lh8Wt0P8MoVK56LTM",
+  authDomain:"lranketa.firebaseapp.com",
+  projectId:"lranketa",
+  storageBucket:"lranketa.firebasestorage.app",
+  messagingSenderId:"431489494824",
+  appId:"1:431489494824:web:f74773937766b513486a1d",
+  measurementId:"G-T7STHWPK69"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
+
+const loginBtn=document.getElementById('loginBtn');
+const form=document.getElementById('form');
+const startBtn=document.getElementById('startBtn');
+const answersContainer=document.getElementById('answersContainer');
+const successMessage=document.getElementById('successMessage');
+
+// Частицы
+for(let i=0;i<25;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.left=Math.random()*100+'%';
+  p.style.animationDuration=(Math.random()*8+5)+'s';
+  p.style.animationDelay=Math.random()*5+'s';
+  document.getElementById('particles').appendChild(p);
+}
+
+// Анимация
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('show');}})},{threshold:0.2});
+document.querySelectorAll('.animate').forEach(el=>observer.observe(el));
+
+// Показ формы
+startBtn.onclick=()=>{startBtn.style.display='none';form.style.display='flex';}
+
+// Вход через Google
+loginBtn.onclick=async()=>{
+  try{
+    const result=await signInWithPopup(auth,provider);
+    const user=result.user;
+    if(user.email!=="sokolovaruslana97@icloud.com"){
+      alert("Доступ запрещён");
+      await auth.signOut();
+      return;
+    }
+    alert("Вход выполнен!");
+    showAllAnswers();
+  }catch(e){console.error(e);}
+}
+
+// Отправка формы
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const data={};
+  form.querySelectorAll('select').forEach((sel,i)=>{data[`q${i+1}`]=sel.value;});
+  data.date=new Date().toLocaleString();
+  try{
+    await addDoc(collection(db,'answers'),data);
+    successMessage.style.display='block';
+    setTimeout(()=>{ successMessage.style.display='none'; location.reload(); },2500);
+  }catch(err){console.error(err);alert("Ошибка отправки");}
+});
+
+// Показ всех анкет
+async function showAllAnswers(){
+  answersContainer.style.display='block';
+  answersContainer.innerHTML="<h3>Все анкеты:</h3>";
+  const querySnapshot=await getDocs(collection(db,'answers'));
+  querySnapshot.forEach(doc=>{
+    const div=document.createElement('div');
+    div.className='answerItem';
+    div.innerHTML=`<strong>${doc.data().date}</strong>: ${JSON.stringify(doc.data())}`;
+    answersContainer.appendChild(div);
   });
+}
 </script>
-
 </body>
 </html>

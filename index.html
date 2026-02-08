@@ -1,380 +1,212 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LR Business — Анкета</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-* { box-sizing: border-box; margin:0; padding:0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LR Business — Premium System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('img/8.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/8.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  overflow-x: hidden;
-}
+        /* --- ТУРБО ПРЕЛОАДЕР (БЕСПРЕРЫВНЫЙ) --- */
+        #loader-wrapper {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s;
+        }
+        .logo-animation {
+            font-size: 100px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            /* Бесконечное вращение без остановок */
+            animation: turboRotate 0.8s linear infinite;
+        }
+        .loader-status {
+            position: absolute;
+            bottom: 20%;
+            font-size: 10px;
+            letter-spacing: 5px;
+            color: #ffd700;
+            text-transform: uppercase;
+            animation: fadeInOut 1s infinite;
+        }
+        @keyframes turboRotate {
+            0% { transform: rotate(0deg) scale(0.7); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(0.7); }
+        }
+        @keyframes fadeInOut { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .loader-hidden { opacity: 0; visibility: hidden; }
 
-#particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.particle { position: absolute; background: rgba(255,255,255,0.3); border-radius: 50%; animation: floatUp linear infinite; }
-@keyframes floatUp { 
-  from { transform: translateY(110vh) scale(0.5); opacity: 0; } 
-  50% { opacity: 0.6; }
-  to { transform: translateY(-10vh) scale(1.2); opacity: 0; } 
-}
+        /* --- КОНТЕНТ --- */
+        #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+        .particle { position: absolute; background: rgba(255,255,255,0.3); border-radius: 50%; animation: floatUp linear infinite; }
+        @keyframes floatUp { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
+        .container { width: 92%; max-width: 850px; margin: auto; position: relative; z-index: 1; padding: 40px 0; }
+        .section { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 24px; padding: 35px; margin-bottom: 50px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 15px 35px rgba(0,0,0,0.4); transition: 0.4s ease; }
+        .section:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+        h2 { margin-bottom: 22px; text-transform: uppercase; letter-spacing: 1.5px; font-size: 24px; font-weight: 800; }
+        p { line-height: 1.8; margin-bottom: 15px; font-size: 16px; color: #f0f0f0; }
+        ul { padding-left: 20px; margin-bottom: 15px; list-style: none; }
+        li { margin-bottom: 12px; position: relative; padding-left: 30px; }
+        li::before { content: '➜'; position: absolute; left: 0; color: #ffd700; }
+        .images-row { display: flex; gap: 20px; margin-bottom: 25px; }
+        .images-row img { width: 50%; border-radius: 18px; border: 1px solid rgba(255,255,255,0.2); }
+        .block-img { width: 100%; border-radius: 20px; margin-bottom: 25px; }
+        .animate { opacity: 0; transform: translateY(50px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+        .animate.show { opacity: 1; transform: translateY(0); }
+        #startBtn { display: block; margin: 40px auto; padding: 22px 60px; background: #fff; color: #000; border: none; border-radius: 50px; font-weight: 800; font-size: 19px; cursor: pointer; animation: pulse 2.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-.container { width: 92%; max-width: 850px; margin: auto; position: relative; z-index: 1; padding: 40px 0; }
-
-.section { 
-  background: rgba(255, 255, 255, 0.05); 
-  backdrop-filter: blur(15px); 
-  border-radius: 24px; 
-  padding: 35px; 
-  margin-bottom: 50px; 
-  border: 1px solid rgba(255,255,255,0.1); 
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-  transition: transform 0.4s ease;
-}
-.section:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
-
-h2 { margin-bottom: 22px; text-transform: uppercase; letter-spacing: 1.5px; color: #fff; font-size: 24px; font-weight: 800; }
-p { line-height: 1.8; margin-bottom: 15px; font-size: 16px; color: #f0f0f0; }
-ul { padding-left: 20px; margin-bottom: 15px; list-style: none; }
-li { margin-bottom: 12px; position: relative; padding-left: 30px; }
-li::before { content: '➜'; position: absolute; left: 0; color: #ffd700; }
-
-.images-row { display: flex; gap: 20px; margin-bottom: 25px; }
-.images-row img { width: 50%; border-radius: 18px; border: 1px solid rgba(255,255,255,0.2); transition: 0.4s; }
-.images-row img:hover { transform: scale(1.03); }
-
-.block-img { width: 100%; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-
-.animate { opacity: 0; transform: translateY(50px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
-.animate.show { opacity: 1; transform: translateY(0); }
-
-#startBtn {
-  display: block; margin: 40px auto; padding: 22px 60px; 
-  background: #fff; color: #000; border: none; border-radius: 50px; 
-  font-weight: 800; font-size: 19px; cursor: pointer;
-  box-shadow: 0 10px 30px rgba(255,255,255,0.2);
-  animation: pulse 2.5s infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-#form { 
-  display: none; flex-direction: column; gap: 25px; 
-  background: rgba(0,0,0,0.85); padding: 40px; border-radius: 30px; 
-  border: 1px solid #ffd700;
-}
-.question-group { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 4px solid #ffd700; transition: 0.3s; }
-.question-group:hover { background: rgba(255,255,255,0.1); }
-.question-group h3 { font-size: 16px; margin-bottom: 15px; font-weight: 600; }
-.category-header { color: #ffd700; font-weight: 800; text-transform: uppercase; font-size: 14px; margin: 15px 0 5px; letter-spacing: 2px; }
-
-select, input { 
-  width: 100%; padding: 15px; border-radius: 12px; border: none; 
-  background: #fff; color: #000; font-size: 15px; font-family: 'Montserrat', sans-serif;
-}
-.submit-btn { 
-  padding: 22px; background: #ffd700; color: #000; border: none; 
-  border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 18px; margin-top: 20px;
-}
-
-#successMsg { display: none; background: #2ecc71; color: #fff; padding: 30px; border-radius: 25px; text-align: center; font-weight: 700; font-size: 20px; }
-</style>
+        /* --- ФОРМА --- */
+        #form { display: none; flex-direction: column; gap: 25px; background: rgba(0,0,0,0.9); padding: 40px; border-radius: 30px; border: 1px solid #ffd700; margin-bottom: 50px; }
+        .question-group { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 4px solid #ffd700; }
+        .category-header { color: #ffd700; font-weight: 800; text-transform: uppercase; font-size: 13px; margin: 15px 0 5px; letter-spacing: 2px; }
+        select, input { width: 100%; padding: 15px; border-radius: 12px; border: none; background: #fff; color: #000; font-family: 'Montserrat', sans-serif; }
+        .submit-btn { padding: 22px; background: #ffd700; color: #000; border: none; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 18px; }
+        #successMsg { display: none; background: #2ecc71; color: #fff; padding: 30px; border-radius: 25px; text-align: center; font-weight: 700; font-size: 20px; margin-bottom: 50px;}
+    </style>
 </head>
 <body>
 
-<div id="particles"></div>
-<div class="container">
-  
-  <div class="section animate">
-    <img src="img/1.jpg" class="block-img">
-    <h2>БИЗНЕС С LR HEALTH & BEAUTY</h2>
-    <p>Доход на рекомендациях без опыта</p>
-  </div>
-
-  <div class="section animate">
-    <img src="img/2.jpg" class="block-img">
-    <p>Мы развиваемся по системе рекомендательного (партнёрского) маркетинга в нише здоровья и красоты вместе с немецким брендом <strong>LR Health & Beauty</strong>.</p>
-    <p>Суть проста:<br>ты пользуешься продуктом → рекомендуешь → получаешь процент с покупок.</p>
-    <p><strong>Ты не продавец. Ты партнёр компании.</strong></p>
-  </div>
-
-  <div class="section animate">
-    <img src="img/3.jpg" class="block-img">
-    <h2>Как работает модель</h2>
-    <p>Ты уже рекомендуешь:</p>
-    <ul>
-      <li>фильмы</li>
-      <li>кафе</li>
-      <li>врачей</li>
-      <li>товары</li>
-    </ul>
-    <p>Разница в том, что обычно тебе за это не платят. <strong>Здесь платят.</strong></p>
-    <p>Компании выгоднее платить людям за рекомендации, чем тратить миллионы на рекламу.</p>
-  </div>
-
-  <div class="section animate">
-    <img src="img/4.jpg" class="block-img">
-    <h2>После регистрации ты становишься партнёром:</h2>
-    <ul>
-      <li>используешь продукт</li>
-      <li>делишься опытом</li>
-      <li>создаёшь свою клиентскую базу</li>
-      <li>получаешь процент с оборота</li>
-    </ul>
-    <p><strong>Доход не разовый — а постоянный.</strong></p>
-  </div>
-
-  <div class="section animate">
-    <img src="img/5.jpg" class="block-img">
-    <h2>За что платят</h2>
-    <p>Партнёр получает процент:</p>
-    <ul>
-      <li>с покупок клиентов</li>
-      <li>с покупок партнёров</li>
-      <li>с роста команды</li>
-    </ul>
-    <p>Процент растёт вместе с оборотом.</p>
-  </div>
-
-  <div class="section animate">
-    <div class="images-row">
-      <img src="img/6.jpg">
-      <img src="img/7.jpg">
-    </div>
-    <h2>Варианты входа в проект</h2>
-    <p>Начать можно без больших вложений — есть два простых варианта:</p>
-    <p><strong>1. Через готовый стартовый набор</strong></p>
-    <p>Ты выбираешь один из предложенных наборов под свою цель (здоровье, уход, энергия, контроль веса и т.д.). В нём уже есть продукты, с которыми удобно делать первые рекомендации.</p>
-    <p><strong>2. Через личный заказ</strong></p>
-    <p>Можно начать с покупки любых продуктов на сумму от 2999 грн. Ты просто выбираешь то, чем сам будешь пользоваться — и на этом строишь доход.</p>
-    <p><strong>Оба варианта дают:</strong> регистрацию, доступ к обучению, поддержку команды и % с рекомендаций.</p>
-  </div>
-
-  <p class="animate" style="text-align: center; font-size: 19px; font-weight: 700; margin: 30px 0;">Заполни анкету — Руслана свяжется с тобой и пошагово поможет зарегистрироваться и начать.</p>
-  <button id="startBtn" class="animate">Заполнить анкету</button>
-
-  <div id="successMsg">✨ Анкета отправлена! Ожидайте сообщения от Русланы.</div>
-
-  <form id="form" action="https://formspree.io/f/mdalkoao" method="POST">
-    
-    <div class="category-header">1. Отношение к работе и деньгам</div>
-    <div class="question-group">
-      <h3>1. Что для вас важнее?</h3>
-      <select name="1_Приоритет" required>
-        <option value="">Выберите...</option>
-        <option>Стабильность (фиксированная зарплата)</option>
-        <option>Возможность заработать больше</option>
-        <option>Свободный график</option>
-        <option>Свой бизнес</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>2. Как вы реагируете, если доход зависит только от вас?</h3>
-      <select name="2_Ответственность" required>
-        <option value="">Выберите...</option>
-        <option>Комфортно — люблю ответственность</option>
-        <option>Нормально, если понимаю систему</option>
-        <option>Лучше когда платят просто за время</option>
-        <option>Это вызывает стресс</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>3. Хотели бы вы увеличить доход в 2–3 раза?</h3>
-      <select name="3_Рост_дохода" required>
-        <option value="">Выберите...</option>
-        <option>Да, готов(а) работать ради этого</option>
-        <option>Да, но без сильных изменений</option>
-        <option>Было бы неплохо</option>
-        <option>Нет, мне хватает</option>
-      </select>
+    <div id="loader-wrapper">
+        <div class="logo-animation">LR</div>
+        <div class="loader-status">ЗАГРУЗКА СИСТЕМЫ...</div>
     </div>
 
-    <div class="category-header">2. Коммуникация</div>
-    <div class="question-group">
-      <h3>4. Легко ли начинать разговор с незнакомыми?</h3>
-      <select name="4_Знакомства" required>
-        <option value="">Выберите...</option>
-        <option>Да</option>
-        <option>Иногда</option>
-        <option>Скорее сложно</option>
-        <option>Очень сложно</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>5. Что чувствуете, когда вам говорят «нет»?</h3>
-      <select name="5_Отказы" required>
-        <option value="">Выберите...</option>
-        <option>Нормально, ищу дальше</option>
-        <option>Неприятно, но переживаю</option>
-        <option>Сильно расстраиваюсь</option>
-        <option>Больше не предлагаю</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>6. Любите помогать людям выбирать / советовать?</h3>
-      <select name="6_Советы" required>
-        <option value="">Выберите...</option>
-        <option>Да, постоянно</option>
-        <option>Иногда</option>
-        <option>Редко</option>
-        <option>Нет</option>
-      </select>
-    </div>
+    <div id="particles"></div>
 
-    <div class="category-header">3. Обучаемость</div>
-    <div class="question-group">
-      <h3>7. Готовы ли учиться 20–40 минут ежедневно?</h3>
-      <select name="7_Обучение" required>
-        <option value="">Выберите...</option>
-        <option>Да</option>
-        <option>Через день</option>
-        <option>Иногда</option>
-        <option>Нет</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>8. Если результат через 3–6 месяцев — это нормально?</h3>
-      <select name="8_Срок" required>
-        <option value="">Выберите...</option>
-        <option>Да</option>
-        <option>Если вижу прогресс</option>
-        <option>Хочу быстрее</option>
-        <option>Слишком долго</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>9. Как вы относитесь к инструкциям?</h3>
-      <select name="9_Система" required>
-        <option value="">Выберите...</option>
-        <option>Люблю — упрощает жизнь</option>
-        <option>Если логично — ок</option>
-        <option>Предпочитаю по-своему</option>
-        <option>Не люблю правила</option>
-      </select>
-    </div>
+    <div class="container">
+        <div class="section animate">
+            <img src="img/1.jpg" class="block-img">
+            <h2>БИЗНЕС С LR HEALTH & BEAUTY</h2>
+            <p>Доход на рекомендациях без опыта</p>
+        </div>
 
-    <div class="category-header">4. Время и занятость</div>
-    <div class="question-group">
-      <h3>10. Сколько времени готовы уделять делу?</h3>
-      <select name="10_Время" required>
-        <option value="">Выберите...</option>
-        <option>2–4 часа</option>
-        <option>1–2 часа</option>
-        <option>До 1 часа</option>
-        <option>Почти нет времени</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>11. Сейчас вы:</h3>
-      <select name="11_Статус" required>
-        <option value="">Выберите...</option>
-        <option>На работе</option>
-        <option>В декрете</option>
-        <option>Учусь</option>
-        <option>Ищу доход</option>
-        <option>Предприниматель</option>
-      </select>
+        <div class="section animate">
+            <img src="img/2.jpg" class="block-img">
+            <p>Мы развиваемся по системе рекомендательного маркетинга вместе с немецким брендом <strong>LR Health & Beauty</strong>.</p>
+            <p>Суть: пользуешься → рекомендуешь → получаешь процент.</p>
+        </div>
+
+        <div class="section animate">
+            <img src="img/3.jpg" class="block-img">
+            <h2>Как работает модель</h2>
+            <p>Ты уже рекомендуешь товары друзьям бесплатно. В LR тебе за это платят.</p>
+        </div>
+
+        <div class="section animate">
+            <img src="img/4.jpg" class="block-img">
+            <h2>Твои шаги:</h2>
+            <ul>
+                <li>используешь продукт</li>
+                <li>делишься опытом</li>
+                <li>получаешь процент с оборота</li>
+            </ul>
+        </div>
+
+        <div class="section animate">
+            <img src="img/5.jpg" class="block-img">
+            <h2>За что платят</h2>
+            <p>Процент с покупок всей твоей сети клиентов и партнёров.</p>
+        </div>
+
+        <div class="section animate">
+            <div class="images-row">
+                <img src="img/6.jpg">
+                <img src="img/7.jpg">
+            </div>
+            <h2>Варианты входа</h2>
+            <p>1. Готовый стартовый набор.</p>
+            <p>2. Личный заказ от 2999 грн.</p>
+        </div>
+
+        <p class="animate" style="text-align: center; font-size: 19px; font-weight: 700; margin: 30px 0;">Заполни анкету — Руслана свяжется с тобой и пошагово поможет зарегистрироваться и начать.</p>
+        
+        <button id="startBtn" class="animate">Заполнить анкету</button>
+
+        <div id="successMsg">✨ Анкета отправлена! Ожидайте сообщения от Русланы.</div>
+
+        <form id="form" action="https://formspree.io/f/mdalkoao" method="POST">
+            <div class="category-header">АНКЕТА ПАРТНЕРА</div>
+            <div class="question-group">
+                <h3>1. Что для вас важнее?</h3>
+                <select name="1_Приоритет" required>
+                    <option value="">Выберите...</option>
+                    <option>Стабильность</option>
+                    <option>Большой заработок</option>
+                    <option>Свобода</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <h3 style="color:#ffd700">Контакты:</h3>
+                <input type="text" name="15_Контакты" placeholder="Телефон и Instagram" required>
+            </div>
+            <button type="submit" class="submit-btn">ОТПРАВИТЬ АНКЕТУ</button>
+        </form>
     </div>
 
-    <div class="category-header">5. Психология</div>
-    <div class="question-group">
-      <h3>12. Как относитесь к продажам?</h3>
-      <select name="12_Продажи" required>
-        <option value="">Выберите...</option>
-        <option>Это помощь людям</option>
-        <option>Нормально</option>
-        <option>Не люблю, но можно</option>
-        <option>Терпеть не могу</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>13. Если окружение не поддержит — продолжите?</h3>
-      <select name="13_Поддержка" required>
-        <option value="">Выберите...</option>
-        <option>Да</option>
-        <option>Если будет наставник</option>
-        <option>Сомневаюсь</option>
-        <option>Скорее нет</option>
-      </select>
-    </div>
-    <div class="question-group">
-      <h3>14. Что вас больше мотивирует?</h3>
-      <select name="14_Мотивация" required>
-        <option value="">Выберите...</option>
-        <option>Деньги</option>
-        <option>Свобода</option>
-        <option>Признание</option>
-        <option>Общение</option>
-        <option>Стабильность</option>
-      </select>
-    </div>
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("loader-wrapper");
+            setTimeout(() => { loader.classList.add("loader-hidden"); }, 2400); 
+        });
 
-    <div class="question-group">
-      <h3 style="color:#ffd700">15. Контакты (Телефон и Instagram):</h3>
-      <input type="text" name="15_Контакты" placeholder="+380... / @ник" required>
-    </div>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate').forEach(el => observer.observe(el));
 
-    <button type="submit" class="submit-btn">ОТПРАВИТЬ АНКЕТУ</button>
-  </form>
-</div>
+        const container = document.getElementById('particles');
+        for(let i=0; i<30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 3 + 2 + 'px';
+            p.style.width = size; p.style.height = size;
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(p);
+        }
 
-<script>
-  const obs = new IntersectionObserver(e => {
-    e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.animate').forEach(el => obs.observe(el));
+        const btn = document.getElementById('startBtn');
+        const form = document.getElementById('form');
+        const success = document.getElementById('successMsg');
 
-  const pContainer = document.getElementById('particles');
-  for(let i=0; i<30; i++) {
-    const p = document.createElement('div');
-    const s = Math.random() * 3 + 2 + 'px';
-    p.className = 'particle';
-    p.style.width = s; p.style.height = s;
-    p.style.left = Math.random()*100+'%';
-    p.style.animationDuration = (Math.random()*10 + 5)+'s';
-    p.style.animationDelay = Math.random()*5+'s';
-    pContainer.appendChild(p);
-  }
+        btn.onclick = () => {
+            btn.style.display = 'none';
+            form.style.display = 'flex';
+            form.scrollIntoView({ behavior: 'smooth' });
+        };
 
-  const btn = document.getElementById('startBtn');
-  const form = document.getElementById('form');
-  const success = document.getElementById('successMsg');
-
-  btn.onclick = () => {
-    btn.style.display = 'none';
-    form.style.display = 'flex';
-    form.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  form.onsubmit = async (e) => {
-    e.preventDefault();
-    const subBtn = form.querySelector('.submit-btn');
-    subBtn.innerText = "ОТПРАВКА...";
-    subBtn.disabled = true;
-
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if(res.ok) {
-      form.style.display = 'none';
-      success.style.display = 'block';
-    } else {
-      alert("Ошибка. Попробуйте снова.");
-      subBtn.innerText = "ОТПРАВИТЬ АНКЕТУ";
-      subBtn.disabled = false;
-    }
-  };
-</script>
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const sBtn = form.querySelector('.submit-btn');
+            sBtn.innerText = "ОТПРАВЛЯЕМ...";
+            sBtn.disabled = true;
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+            if(res.ok) {
+                form.style.display = 'none';
+                success.style.display = 'block';
+            }
+        };
+    </script>
 </body>
 </html>
